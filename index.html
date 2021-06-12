@@ -30,7 +30,7 @@
           autocomplete
           id="urlInput"
           type="url"
-          value="https://source.unsplash.com/random/500x500"
+          value=""
         />
         <span id="details"><span>
       </div>
@@ -41,11 +41,17 @@
       let detailsSpan = document.querySelector("#details");
       let image = document.querySelector("#imgElem");
 
+      input.value = localStorage.getItem("foto_imageurl") || "https://source.unsplash.com/random/500x500";
+
       image.addEventListener("load", (e) => {
         detailsSpan.innerHTML = `WxH :${image.naturalWidth}x${image.naturalHeight}`;
       });
       const syncUrl = () => {
         image.src = input.value;
+        localStorage.setItem("foto_imageurl", input.value);
+        if(input.value === ""){
+          localStorage.removeItem("foto_imageurl");
+        }
       };
       input.addEventListener("input", (e) => {
         syncUrl();
