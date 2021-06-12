@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Image Viewer with URL</title>
+    <style>
+      .transparency-grid {
+        background-color: #fff;
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3LjkzNyA3LjkzOCIgaGVpZ2h0PSIzMCIgd2lkdGg9IjMwIj48cGF0aCBwYWludC1vcmRlcj0ic3Ryb2tlIGZpbGwgbWFya2VycyIgZD0iTS4wMTQuMDE0SDMuOTdWMy45N0guMDE0ek0zLjk3IDMuOTY4aDMuOTU0djMuOTU1SDMuOTd6IiBmaWxsPSIjZWVlZmYwIi8+PC9zdmc+);
+        background-size: 25px;
+      }
+      #details{
+        font-size: 1rem;
+      }
+    </style>
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-field">
+        <input
+          placeholder="Paste Image URL Here"
+          autofocus
+          autocomplete
+          id="urlInput"
+          type="url"
+          value="https://source.unsplash.com/random/500x500"
+        />
+        <span id="details"><span>
+      </div>
+      <img class="transparency-grid" id="imgElem" src="" />
+    </div>
+    <script>
+      let input = document.querySelector("#urlInput");
+      let detailsSpan = document.querySelector("#details");
+      let image = document.querySelector("#imgElem");
+
+      image.addEventListener("load", (e) => {
+        detailsSpan.innerHTML = `WxH :${image.naturalWidth}x${image.naturalHeight}`;
+      });
+      const syncUrl = () => {
+        image.src = input.value;
+      };
+      input.addEventListener("input", (e) => {
+        syncUrl();
+      });
+      syncUrl();
+    </script>
+  </body>
+</html>
